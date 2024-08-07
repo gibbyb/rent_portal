@@ -1,12 +1,3 @@
-# T3 / Next.js Web App Template
+# Rent Portal
 
-Just the template I use for Web Apps. Includes:
-
-- Next.js
-- Tailwind CSS
-- TypeScript
-- ESLint
-- Prettier
-- Drizzle
-- Auth.js
-- PostgreSQL ready
+## Portal for tenants to pay rent
