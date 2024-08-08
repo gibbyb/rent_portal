@@ -2,6 +2,7 @@
 import Theme_Toggle from "~/components/theme/theme_toggle"
 import { auth } from "~/auth"
 import Sign_In_Apple_Button from "~/components/auth/server/SignInAppleButton"
+import Sign_Out_Button from "~/components/auth/server/SignOutButton"
 import Title from "~/components/home/Title"
 
 export default async function HomePage() {
@@ -26,6 +27,7 @@ export default async function HomePage() {
           <Theme_Toggle />
           <div className="w-full flex flex-col justify-center items-center">
             <h1>Welcome, {email}</h1>
+            <Sign_Out_Button />
           </div>
         </div>
       </main>
