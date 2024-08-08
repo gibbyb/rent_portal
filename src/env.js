@@ -11,6 +11,12 @@ export const env = createEnv({
     NODE_ENV: z
       .enum(["development", "test", "production"])
       .default("development"),
+    AUTH_SECRET: z.string(),
+    AUTH_APPLE_ID: z.string(),
+    AUTH_APPLE_SECRET: z.string(),
+    APPLE_TEAM_ID: z.string(),
+    APPLE_KEY_ID: z.string(),
+    APPLE_PRIVATE_KEY_PATH: z.string(),
   },
 
   /**
@@ -29,6 +35,12 @@ export const env = createEnv({
   runtimeEnv: {
     DATABASE_URL: process.env.DATABASE_URL,
     NODE_ENV: process.env.NODE_ENV,
+    AUTH_SECRET: process.env.AUTH_SECRET,
+    AUTH_APPLE_ID: process.env.AUTH_APPLE_ID,
+    AUTH_APPLE_SECRET: process.env.AUTH_APPLE_SECRET,
+    APPLE_TEAM_ID: process.env.APPLE_TEAM_ID,
+    APPLE_KEY_ID: process.env.APPLE_KEY_ID,
+    APPLE_PRIVATE_KEY_PATH: process.env.APPLE_PRIVATE_KEY_PATH,
     // NEXT_PUBLIC_CLIENTVAR: process.env.NEXT_PUBLIC_CLIENTVAR,
   },
   /**
