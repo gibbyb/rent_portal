@@ -2,6 +2,7 @@ import "~/styles/globals.css";
 import { Inter as FontSans } from "next/font/google";
 import { cn } from "~/lib/utils"
 import { SessionProvider } from "next-auth/react";
+import Theme_Provider from "~/components/theme/theme_provider"
 import { type Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -25,9 +26,16 @@ export default function RootLayout({
           "min-h-screen bg-background font-sans antialiased",
           fontSans.variable)}
       >
-        <SessionProvider>
-        {children}
-        </SessionProvider>
+        <Theme_Provider
+          attribute="class"
+          defaultTheme="system"
+          enableSystem={true}
+          disableTransitionOnChange={true}
+        >
+          <SessionProvider>
+          {children}
+          </SessionProvider>
+        </Theme_Provider>
       </body>
     </html>
   );
