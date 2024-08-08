@@ -6,7 +6,6 @@ import { eq } from "drizzle-orm"
 
 export const set_users_name_by_email = async (users_name: string, users_email: string) => {
   try {
-    console.log('Updating user:', users_email, 'with name:', users_name); // Log input
     await db.update(schema.users)
       .set({ name: users_name })
       .where(eq(schema.users.email, users_email))
@@ -16,10 +15,29 @@ export const set_users_name_by_email = async (users_name: string, users_email: s
   }
 };
 
-export const get_users_name_by_id = async (users_id: string) => {
+export const get_users_name_by_email = async (users_email: string) => {
   const result = await db.select({
     users_name: schema.users.name,
   }).from(schema.users)
-  .where(eq(schema.users.id, users_id))
+  .where(eq(schema.users.email, users_email))
+  return result;
+}
+
+export const set_users_pfp_by_email = async (users_pfp: string, users_email: string) => {
+  try {
+    await db.update(schema.users)
+      .set({ image: users_pfp })
+      .where(eq(schema.users.email, users_email))
+  } catch (error) {
+    console.error('Error updating user pfp:', error);
+    throw error;
+  }
+};
+
+export const get_users_pfp_by_email = async (users_email: string) => {
+  const result = await db.select({
+    users_pfp: schema.users.image,
+  }).from(schema.users)
+  .where(eq(schema.users.email, users_email))
   return result;
 }

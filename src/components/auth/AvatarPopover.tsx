@@ -17,8 +17,8 @@ import Sign_Out_Button from "~/components/auth/server/SignOutButton"
 
 export default async function Avatar_Popover() {
   const session = await auth();
-  const pfp = session?.user?.image ?? "https://github.com/shadcn.png";
-  const users_name = session?.user?.name ?? "shadcn";
+  const pfp = session?.user?.image ?? "";
+  const users_name = session?.user?.name ?? "New User";
   const initials = users_name.split(" ").map((name) => name[0]).join("");
   console.log(pfp);
   return (

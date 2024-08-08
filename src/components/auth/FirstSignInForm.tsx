@@ -36,7 +36,7 @@ export default function First_Sign_In_Form({ users_name, users_email }: { users_
 
   const update_users_name = async (users_name: string, users_email: string) => {
     try {
-      const res = await fetch("/api/users/set_username_by_email", {
+      const res = await fetch("/api/users/set_users_name_by_email", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -54,9 +54,32 @@ export default function First_Sign_In_Form({ users_name, users_email }: { users_
     }
   };
 
+  const update_users_pfp = async (users_pfp: string, users_email: string) => {
+    try {
+      const res = await fetch("/api/users/set_users_pfp_by_email", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          users_pfp: users_pfp,
+          users_email: users_email,
+        }),
+      });
+      if (!res.ok) {
+        throw new Error("Failed to update user's name");
+      }
+    } catch (error) {
+      console.error("Could not update user's name", error);
+    }
+  };
 
   const onSubmit = async (data: z.infer<typeof formSchema>) => {
+    if (data.users_profile_image === undefined) {
+      data.users_profile_image = "";
+    }
     await update_users_name(data.users_name, users_email);
+    await update_users_pfp(data.users_profile_image, users_email);
     setIsOpen(false);
 };
 
