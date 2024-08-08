@@ -18,11 +18,17 @@ export default async function HomePage() {
         </div>
       </main>
     );
+  } else {
+    const email = session?.user?.email;
+    return (
+      <main className="min-h-screen">
+        <div className="w-full justify-end items-end p-3 flex flex-col">
+          <Theme_Toggle />
+          <div className="w-full flex flex-col justify-center items-center">
+            <h1>Welcome, {email}</h1>
+          </div>
+        </div>
+      </main>
+    );
   }
-  return (
-    <main className="min-h-screen">
-      <Theme_Toggle />
-
-    </main>
-  );
 }
