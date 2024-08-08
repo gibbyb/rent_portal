@@ -13,7 +13,8 @@
     "lint": "next lint",
     "start": "next start",
     "generate-apple-secret": "tsx src/scripts/generate_apple_secret.ts",
-    "go": "git pull && next build && next start"
+    "go": "git pull && next dev",
+    "goprod": "git pull && next build && next start"
   },
   "dependencies": {
     "@auth/drizzle-adapter": "^1.4.2",
