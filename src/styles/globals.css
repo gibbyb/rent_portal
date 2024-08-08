@@ -29,6 +29,7 @@
     --chart-3: 197 37% 24%;
     --chart-4: 43 74% 66%;
     --chart-5: 27 87% 67%;
+    --apple-logo: url("/logos/Apple_logo_grey.svg");
   }
 
   .dark {
@@ -56,6 +57,7 @@
     --chart-3: 30 80% 55%;
     --chart-4: 280 65% 60%;
     --chart-5: 340 75% 55%;
+    --apple-logo: url("/logos/Apple_logo_black.svg");
   }
 }
 
@@ -66,4 +68,13 @@
   body {
     @apply bg-background text-foreground;
   }
+}
+
+.apple-logo {
+  width: 20px;
+  height: 20px;
+  margin-right: 1rem;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
 }
