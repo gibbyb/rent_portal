@@ -1,7 +1,7 @@
-import Apple from "next-auth/providers/apple"
+//import Apple from "next-auth/providers/apple"
 
-import type { NextAuthConfig } from "next-auth"
+//import type { NextAuthConfig } from "next-auth"
 
-export default {
-  providers: [Apple],
-} satisfies NextAuthConfig
+//export default {
+  //providers: [Apple],
+//} satisfies NextAuthConfig
