@@ -18,10 +18,23 @@ export const db = drizzle(pool)
  
 export const frequencyEnum = pgEnum("frequency", ["Monthly", "Bi-weekly", "Weekly"])
 export const workOrderStatusEnum = pgEnum("workOrderStatus", ["Pending", "Open", "Closed"])
+export const paymentTypeEnum = pgEnum("paymentType", ["Security Deposit", "Rent", "Late Fee", "Other"])
+export const paymentStatusEnum = pgEnum("paymentStatus", ["Pending", "Complete", "Late", "Refunded"])
 export const preferredDaysofWeekEnum = pgEnum("preferredDaysofWeek", 
   ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"])
 export const propertyTypeEnum = pgEnum("propertyType", ["Apartment", "Condominium",
   "Mobile Home", "Multi-Unit Home", "Single-Family Residence", "Townhouse"])
+export const workOrderPriorityEnum = pgEnum("workOrderPriority", ["Low", "High"])
+export const workOrderTypeEnum = pgEnum("workOrderType",
+  ["Appliance Repair", "Carbon Monoxide Detector Installation", "Ceiling Fan Repair", 
+   "Carpentry Repair", "Door Installation/Repair", "Drywall Installation/Repair", 
+   "Electrical Repair", "Extermination", "Fire Alarm Maintenance", "Fencing Repair", 
+   "Gutter Cleaning", "HVAC Repair", "Light Fixture Repair", "Mold Remediation", 
+   "Painting", "Pest Control", "Pool/Hot Tub Maintenance", "Plumbing Repair", 
+   "Roof Repair/Maintenance", "Septic System Maintenance", "Smoke Detector Replacement", 
+   "Tile Flooring", "Tree Trimming/Cutting", "Water Treatment", "Well/Water Testing", 
+   "Window Repair/Installation"]
+);
 
 export const users = pgTable(
   "user",
@@ -33,7 +46,8 @@ export const users = pgTable(
     email: text("email").unique().notNull(),
     emailVerified: timestamp("emailVerified", { mode: "date" }),
     image: text("image"),
-    tenantID: text("tenantID").references(() => tenants.id, { onDelete: "cascade" }),
+    phoneNumber: text("phoneNumber"),
+    propertyID: text("propertyID").references(() => properties.id, { onDelete: "cascade" }),
     stripeCustomerID: text("stripeCustomerID"),
   }
 )
@@ -127,15 +141,9 @@ export const properties = pgTable(
     zip: text("zip").notNull(),
     monthlyRent: numeric("monthlyRent").notNull(),
     securityDeposit: numeric("securityDeposit"),
+    leaseStartDate: timestamp("leaseStartDate").notNull(),
+    leaseEndDate: timestamp("leaseEndDate").notNull(),
     propertyType: propertyTypeEnum("propertyType").notNull(),
-  }
-)
-
-export const tenants = pgTable(
-  "tenant",
-  {
-    id: text("id").primaryKey(),
-    propertyID: text("propertyID").notNull().references(() => properties.id, { onDelete: "cascade" }),
   }
 )
 
@@ -147,7 +155,8 @@ export const payments = pgTable(
     stripePaymentID: text("stripeID"),
     amount: numeric("amount").notNull(),
     paymentDate: timestamp("paymentDate").notNull(),
-    status: text("status").notNull(),
+    paymentType: paymentTypeEnum("paymentType").notNull(),
+    paymentStatus: paymentStatusEnum("paymentStatus").notNull(),
   }
 )
 
@@ -171,7 +180,9 @@ export const workorders = pgTable(
     id: text("id").primaryKey(),
     userID: text("userID").notNull().references(() => users.id, { onDelete: "cascade" }),
     date: timestamp("date").notNull(),
+    type: workOrderTypeEnum("type").notNull(),
     status: workOrderStatusEnum("status").notNull().default("Pending"),
+    priority: workOrderPriorityEnum("priority").notNull().default("Low"),
     title: text("title").notNull(),
     description: text("description"),
   }
@@ -181,9 +192,21 @@ export const documents = pgTable(
   "document",
   {
     id: text("id").primaryKey(),
-    tenantID: text("tenantID").notNull().references(() => tenants.id, { onDelete: "cascade" }),
+    propertyID: text("propertyID").notNull().references(() => properties.id, { onDelete: "cascade" }),
     name: text("name").notNull(),
     type: text("type").notNull(),
     file: text("file").notNull(),
+  }
+)
+
+export const emergencyContacts = pgTable(
+  "emergencyContact",
+  {
+    id: text("id").primaryKey(),
+    userID: text("userID").notNull().references(() => users.id, { onDelete: "cascade" }),
+    name: text("name").notNull(),
+    mobilePhoneNumber: text("mobilePhoneNumber"),
+    workPhoneNumber: text("workPhoneNumber"),
+    email: text("email"),
   }
 )
