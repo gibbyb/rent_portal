@@ -6,6 +6,8 @@ import Title from "~/components/home/Title"
 import Avatar_Popover from "~/components/auth/AvatarPopover"
 import First_Sign_In_Form from "~/components/auth/FirstSignInForm"
 import Hero from "~/components/home/Hero"
+import Breadcrumb_Home from "~/components/home/breadcrumb/BreadcrumbHome"
+import Nav_Bar from "~/components/home/NavBar"
 
 export default async function HomePage() {
   const session = await auth();
@@ -27,18 +29,22 @@ export default async function HomePage() {
     return (
       <main className="min-h-screen">
         < First_Sign_In_Form users_name={users_name} users_email={users_email} />
-        <div className="w-11/12 flex flex-row p-4 mx-auto">
-          < Hero />
-          <div className="w-full p-3 flex flex-row justify-end items-end">
-            <div className="my-auto flex flex-row justify-end items-end">
-              <div className="pb-1 px-4">
-                <Theme_Toggle />
-              </div>
-              <div className="pl-2">
-                <Avatar_Popover />
+        <div className="w-11/12 flex flex-col mx-auto">
+          <div className="w-full flex flex-row p-4">
+            < Hero />
+            < Breadcrumb_Home />
+            <div className="w-full p-3 flex flex-row justify-end items-end">
+              <div className="my-auto flex flex-row justify-end items-end">
+                <div className="pb-1 px-4">
+                  <Theme_Toggle />
+                </div>
+                <div className="pl-2">
+                  <Avatar_Popover />
+                </div>
               </div>
             </div>
           </div>
+          <Nav_Bar />
         </div>
       </main>
     );
