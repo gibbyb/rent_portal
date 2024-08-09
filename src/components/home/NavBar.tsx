@@ -4,10 +4,8 @@ import Link from "next/link"
 import {
   Card,
   CardContent,
-  CardDescription,
   CardFooter,
   CardHeader,
-  CardTitle,
 } from "~/components/ui/card"
 
 const fontSans = FontSans({
@@ -20,7 +18,7 @@ export default function Nav_Bar() {
     <div className={cn("flex flex-col justify-start items-start " + 
       "py-6 text-2xl font-semibold font-sans antialiased", fontSans.variable)}
     >
-      <Card className="p-6">
+      <Card className="p-4">
         <CardHeader>
         </CardHeader>
         <CardContent className="pb-12">
