@@ -25,7 +25,7 @@ export default async function Avatar_Popover() {
     <DropdownMenu>
       <DropdownMenuTrigger>
         <Avatar>
-          <AvatarImage src={pfp} alt="@shadcn" />
+          <AvatarImage src={pfp} alt="@shadcn"/>
           <AvatarFallback>{initials}</AvatarFallback>
         </Avatar>
       </DropdownMenuTrigger>
