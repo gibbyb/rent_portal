@@ -4,8 +4,6 @@ import Link from "next/link"
 import {
   Card,
   CardContent,
-  CardFooter,
-  CardHeader,
 } from "~/components/ui/card"
 
 const fontSans = FontSans({
@@ -19,50 +17,51 @@ export default function Nav_Bar() {
       "py-6 text-2xl font-semibold font-sans antialiased", fontSans.variable)}
     >
       <Card className="p-4">
-        <CardHeader>
-        </CardHeader>
-        <CardContent className="pb-12">
+        <CardContent className="py-4">
           <Link href="/">
             Dashboard
           </Link>
         </CardContent>
-        <CardContent className="pb-12">
+        <CardContent className="py-4">
           <Link href="/">
             Make Payment
           </Link>
         </CardContent>
-        <CardContent className="pb-12">
+        <CardContent className="py-4">
           <Link href="/">
             Auto-Payment
           </Link>
         </CardContent>
-        <CardContent className="pb-12">
+        <CardContent className="py-4">
           <Link href="/">
             Payment Methods
           </Link>
         </CardContent>
-        <CardContent className="pb-12">
+        <CardContent className="py-4">
           <Link href="/">
             Payment History
           </Link>
         </CardContent>
-        <CardContent className="pb-12">
+        <CardContent className="py-4">
           <Link href="/">
             Workorders
           </Link>
         </CardContent>
-        <CardContent className="pb-12">
+        <CardContent className="py-4">
           <Link href="/">
             Messages
           </Link>
         </CardContent>
-        <CardContent>
+        <CardContent className="py-4">
           <Link href="/">
             Documents
           </Link>
         </CardContent>
-        <CardFooter>
-        </CardFooter>
+        <CardContent className="pt-4">
+          <Link href="/">
+            Bill Tracker
+          </Link>
+        </CardContent>
       </Card>
     </div>
   );
