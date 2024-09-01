@@ -79,7 +79,7 @@ export default async function RootLayout({
                 < First_Sign_In_Form users_name={users_name} users_email={users_email} />
               </div>
               <div className="flex flex-row p-4">
-                <div className="w-1/4 p-4">
+                <div className="w-1/6 md:w-1/4 p-4">
                   <div className="flex flex-col">
                     <Hero />
                     <Nav_Bar />

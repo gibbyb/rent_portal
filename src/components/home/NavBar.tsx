@@ -14,9 +14,9 @@ const fontSans = FontSans({
 export default function Nav_Bar() {
   return (
     <div className={cn("flex flex-col justify-start items-start " + 
-      "py-6 text-2xl font-semibold font-sans antialiased", fontSans.variable)}
+      "py-6 text-lg md:text-xl lg:text-2xl font-semibold font-sans antialiased", fontSans.variable)}
     >
-      <Card className="p-4">
+      <Card className="md:p-4">
         <CardContent className="py-4">
           <Link href="/">
             Dashboard
@@ -58,7 +58,7 @@ export default function Nav_Bar() {
           </Link>
         </CardContent>
         <CardContent className="pt-4">
-          <Link href="/">
+          <Link href="/billtracker">
             Bill Tracker
           </Link>
         </CardContent>
