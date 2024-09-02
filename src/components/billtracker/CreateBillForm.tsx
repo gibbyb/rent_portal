@@ -1,4 +1,10 @@
 import React from "react";
+import {
+  Drawer,
+  DrawerTrigger,
+} from "~/components/ui/drawer"
+import CreateBillDrawer from "~/components/billtracker/CreateBillDrawer"
+import { Button } from "~/components/ui/button"
 
 type CreateBillFormProps = {
   date: Date;
@@ -21,7 +27,14 @@ export default function CreateBillForm({date, setIsOpen}: CreateBillFormProps) {
           x
         </button>
       </div>
-      <h1>Create Bill</h1>
+      <Drawer>
+        <DrawerTrigger className="w-full">
+          <Button variant="outline" size="icon" className="border-none w-full">
+            Create new Bill
+          </Button>
+        </DrawerTrigger>
+        <CreateBillDrawer date={date} />
+      </Drawer>
     </div>
   );
 }

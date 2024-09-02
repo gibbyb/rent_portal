@@ -237,7 +237,6 @@ export const bills = pgTable(
     createdAt: timestamp("createdAt").notNull().defaultNow(),
     dueDate: timestamp("dueDate").notNull(),
     amount: numeric("amount").notNull(),
-    currency: text("currency").notNull().default("USD"),
     recurrence: billRecurrenceEnum("recurrence"),
     attachmentUrl: text("attachmentUrl"),
   }
