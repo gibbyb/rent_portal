@@ -16,15 +16,18 @@ const connectionString = process.env.DATABASE_URL ?? "";
 const pool = postgres(connectionString, { max: 1 })
 export const db = drizzle(pool)
  
-export const frequencyEnum = pgEnum("frequency", ["Monthly", "Bi-weekly", "Weekly"])
-export const workOrderStatusEnum = pgEnum("workOrderStatus", ["Pending", "Open", "Closed"])
-export const paymentTypeEnum = pgEnum("paymentType", ["Security Deposit", "Rent", "Late Fee", "Other"])
-export const paymentStatusEnum = pgEnum("paymentStatus", ["Pending", "Complete", "Late", "Refunded"])
+export const frequencyEnum = pgEnum("frequency", ["Monthly", "Bi-weekly", "Weekly"]);
+export const workOrderStatusEnum = pgEnum("workOrderStatus", ["Pending", "Open", "Closed"]);
+export const paymentTypeEnum = pgEnum("paymentType", ["Security Deposit", "Rent", "Late Fee", "Other"]);
+export const paymentStatusEnum = pgEnum("paymentStatus", ["Pending", "Complete", "Late", "Refunded"]);
 export const preferredDaysofWeekEnum = pgEnum("preferredDaysofWeek", 
-  ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"])
+  ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"]
+);
 export const propertyTypeEnum = pgEnum("propertyType", ["Apartment", "Condominium",
-  "Mobile Home", "Multi-Unit Home", "Single-Family Residence", "Townhouse"])
-export const workOrderPriorityEnum = pgEnum("workOrderPriority", ["Low", "High"])
+  "Mobile Home", "Multi-Unit Home", "Single-Family Residence", "Townhouse"]
+);
+export const workOrderPriorityEnum = pgEnum("workOrderPriority", ["Low", "High"]
+);
 export const workOrderTypeEnum = pgEnum("workOrderType",
   ["Appliance Repair", "Carbon Monoxide Detector Installation", "Ceiling Fan Repair", 
    "Carpentry Repair", "Door Installation/Repair", "Drywall Installation/Repair", 
@@ -34,6 +37,19 @@ export const workOrderTypeEnum = pgEnum("workOrderType",
    "Roof Repair/Maintenance", "Septic System Maintenance", "Smoke Detector Replacement", 
    "Tile Flooring", "Tree Trimming/Cutting", "Water Treatment", "Well/Water Testing", 
    "Window Repair/Installation"]
+);
+export const billStatusEnum = pgEnum("billStatus",
+  ["Awaiting Payment", "Paid", "Scheduled", "Late", "Refunded"]
+);
+export const billTypeEnum = pgEnum("billType",
+  ["Rent", "Power", "Internet", "Gas", "Water", "Phone Bill", "Cable",
+  "Security Deposit", "Other"]
+);
+export const billPaymentTypeEnum = pgEnum("billPaymentType",
+  ["Paid Online", "Zelle", "Cash", "Cash App", "Apple Pay"]
+);
+export const billRecurrenceEnum = pgEnum("billRecurrence",
+  ["Monthly", "Bi-weekly", "Weekly", "Annually"]
 );
 
 export const users = pgTable(
@@ -208,5 +224,46 @@ export const emergencyContacts = pgTable(
     mobilePhoneNumber: text("mobilePhoneNumber"),
     workPhoneNumber: text("workPhoneNumber"),
     email: text("email"),
+  }
+)
+
+export const bills = pgTable(
+  "bill",
+  {
+    id: text("id").primaryKey(),
+    billType: billTypeEnum("billType").notNull(),
+    billDescription: text("billDescription"),
+    createdBy: text("createdBy").notNull().references(() => users.id, { onDelete: "cascade" }),
+    createdAt: timestamp("createdAt").notNull().defaultNow(),
+    dueDate: timestamp("dueDate").notNull(),
+    amount: numeric("amount").notNull(),
+    currency: text("currency").notNull().default("USD"),
+    recurrence: billRecurrenceEnum("recurrence"),
+    attachmentUrl: text("attachmentUrl"),
+  }
+)
+
+export const billsSplitBetween = pgTable(
+  "billSplitBetween",
+  {
+    id: text("id").primaryKey(),
+    billID: text("billID").notNull().references(() => bills.id, { onDelete: "cascade" }),
+    userID: text("userID").notNull().references(() => users.id, { onDelete: "cascade" }),
+    amount: numeric("amount").notNull(),
+    status: billStatusEnum("status").notNull(),
+    paymentType: billPaymentTypeEnum("paymentType"),
+    paidAt: timestamp("paidAt"),
+    attachmentUrl: text("attachmentUrl"),
+  }
+)
+
+export const billReminders = pgTable(
+  "billReminders",
+  {
+    id: text("id").primaryKey(),
+    billID: text("billID").notNull().references(() => bills.id, { onDelete: "cascade" }),
+    userID: text("userID").notNull().references(() => users.id, { onDelete: "cascade" }),
+    reminderDate: timestamp("reminderDate").notNull(),
+    reminderSent: boolean("reminderSent").notNull().default(false),
   }
 )
