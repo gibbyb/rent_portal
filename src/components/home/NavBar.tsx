@@ -19,11 +19,6 @@ export default function Nav_Bar() {
       <Card className="md:p-4">
         <CardContent className="py-4">
           <Link href="/">
-            Dashboard
-          </Link>
-        </CardContent>
-        <CardContent className="py-4">
-          <Link href="/">
             Make Payment
           </Link>
         </CardContent>
