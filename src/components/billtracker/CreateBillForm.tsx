@@ -29,7 +29,9 @@ export default function CreateBillForm({date, setIsOpen}: CreateBillFormProps) {
       </div>
       <Drawer>
         <DrawerTrigger className="w-full">
-          <Button variant="outline" size="icon" className="border-none w-full">
+          <Button variant="outline" size="icon"
+            className="border-none w-full"
+          >
             Create new Bill
           </Button>
         </DrawerTrigger>

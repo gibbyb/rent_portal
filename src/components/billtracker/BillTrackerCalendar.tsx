@@ -29,7 +29,8 @@ export default function BillTrackerCalendar() {
         !calendarRef.current.contains(event.target as Node) &&
         !popoverRef.current.contains(event.target as Node)
       ) {
-        setIsOpen(false)
+        //setIsOpen(false)
+        console.log('Calendar closed');
       }
     }
     document.addEventListener('mousedown', handleClickOutside)
