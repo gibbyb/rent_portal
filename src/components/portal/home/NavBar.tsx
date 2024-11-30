@@ -13,28 +13,13 @@ const fontSans = FontSans({
 
 export default function Nav_Bar() {
   return (
-    <div className={cn("flex flex-col justify-start items-start " + 
+    <div className={cn("flex flex-col justify-start items-start h-5/6 my-auto" + 
       "py-6 text-lg md:text-xl lg:text-2xl font-semibold font-sans antialiased", fontSans.variable)}
     >
       <Card className="md:p-4">
         <CardContent className="py-4">
           <Link href="/">
-            Make Payment
-          </Link>
-        </CardContent>
-        <CardContent className="py-4">
-          <Link href="/">
-            Auto-Payment
-          </Link>
-        </CardContent>
-        <CardContent className="py-4">
-          <Link href="/">
-            Payment Methods
-          </Link>
-        </CardContent>
-        <CardContent className="py-4">
-          <Link href="/">
-            Payment History
+            Payments
           </Link>
         </CardContent>
         <CardContent className="py-4">
@@ -53,7 +38,7 @@ export default function Nav_Bar() {
           </Link>
         </CardContent>
         <CardContent className="pt-4">
-          <Link href="/billtracker">
+          <Link href="/account/billtracker">
             Bill Tracker
           </Link>
         </CardContent>

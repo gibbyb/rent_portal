@@ -10,7 +10,7 @@ export default function Breadcrumb_Home() {
     <Breadcrumb className="w-full m-auto flex flex-row justify-center items-center">
       <BreadcrumbList>
         <BreadcrumbItem>
-          <Link href="/">
+          <Link href="/account">
             <h1 className="text-3xl font-bold text-center font-sans antialiased">
               Dashboard
             </h1>

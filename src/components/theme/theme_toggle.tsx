@@ -13,6 +13,7 @@ import {
 export default function Theme_Toggle() {
   const { setTheme } = useTheme()
   return (
+    <div className="mx-2">
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
         <Button variant="outline" size="icon" className="border-none">
@@ -33,5 +34,6 @@ export default function Theme_Toggle() {
         </DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>
+    </div>
   )
 }

@@ -34,7 +34,9 @@ export default async function HomePage() {
                   <p className="text-gray-600">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
                 </CardContent>
                 <CardFooter>
-                  <Button className="w-full">View Details</Button>
+                  <Link href={`/properties/${i}`} passHref>
+                    <Button className="w-full">View Details</Button>
+                  </Link>
                 </CardFooter>
               </Card>
             ))}

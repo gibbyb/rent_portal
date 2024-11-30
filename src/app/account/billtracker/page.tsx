@@ -1,7 +1,7 @@
 "use server"
 import { auth } from "~/auth"
-import BreadCrumbBillTracker from "~/components/home/breadcrumb/BreadCrumbBillTracker"
-import BillTrackerCalendar from "~/components/billtracker/BillTrackerCalendar"
+import BreadCrumbBillTracker from "~/components/portal/home/breadcrumb/BreadCrumbBillTracker"
+import BillTrackerCalendar from "~/components/portal/billtracker/BillTrackerCalendar"
 
 export default async function HomePage() {
   const session = await auth()
